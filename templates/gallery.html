@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Chart Gallery
+{% endblock %}
+
+{% block style %}
+  #imageGalleryTable td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #imageGalleryTable td img {
+    max-height: 250px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .background-container {
+    height: 100vh;
+    background-image: url('{{ MEDIA_URL }}custom_bkg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+    padding: 40px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white !important;
+    border: 1px solid #888 !important;
+    margin: 0 2px;
+    border-radius: 4px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border: 2px solid white !important;
+    font-weight: bold;
+    color: green !important;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+  }
+
+  .dataTables_wrapper .dataTables_length {
+    color: white;
+  }
+
+  .dataTables_wrapper .dataTables_length select {
+    color: white;
+  }
+
+    #fullScreenLoader {
+    position: fixed;   /* Fixed to viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none; /* Hidden by default */
+    display: flex;
+    align-items: center;   /* Vertical center */
+    justify-content: center; /* Horizontal center */
+    flex-direction: column;
+  }
+
+  #fullScreenLoader .loader-text {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  #fullScreenLoader .spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+{% endblock %}
+
+{% block content %}
+<div class="background-container">
+  <h2 class="mb-4" style="color: white;">Chart Gallery</h2>
+  <table id="imageGalleryTable" class="table table-bordered display" style="width: 100%;">
+    <colgroup>
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 25%;">
+      <col style="width: 5%;">
+    </colgroup>
+    <thead class="thead-dark">
+      <tr>
+        <th>Main Image</th>
+        <th>Claude Image</th>
+        <th>GPT Image</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="fullScreenLoader">
+    <div class="loader-text">Loading...</div>
+    <div class="spinner"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  $(document).ready(function () {
+    const loader = $('#fullScreenLoader');
+
+    const table = $('#imageGalleryTable').DataTable({
+      serverSide: true,
+      ajax: {
+        url: '/api/images/',
+        type: 'GET',
+        beforeSend: function () {
+          loader.show();
+        },
+        complete: function () {
+          loader.hide();
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching data:', error);
+          loader.hide();
+        }
+      },
+      columns: [
+        {
+          title: "Main Image",
+          render: function (data) {
+            return `<img src="${data}" style="width: 100%; height: auto; object-fit: contain;">`;
+          }
+        },
+        {
+          title: "Claude Image",
+          render: function (data) {
+            return data
+              ? `<img src="${data}" style="width: 100%; height: auto; object-fit: contain;">`
+              : '<div style="text-align: center; color: #888;">No image found</div>';
+          }
+        },
+        {
+          title: "GPT Image",
+          render: function (data) {
+            return data
+              ? `<img src="${data}" style="width: 100%; height: auto; object-fit: contain;">`
+              : '<div style="text-align: center; color: #888;">No image found</div>';
+          }
+        },
+        {
+          title: "Action",
+          render: function (data, type, row) {
+            const id = row[3];
+            const hasView = row[1] || row[2];
+            return hasView
+              ? `<a href="/view/${id}" class="btn btn-primary btn-sm">View</a>`
+              : '';
+          }
+        }
+      ],
+      pageLength: 10,
+      deferRender: true,
+      responsive: true,
+      searching: false,
+    });
+  });
+</script>
+{% endblock %}

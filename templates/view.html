@@ -1,0 +1,955 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    MisVisFix
+{% endblock %}
+
+{% block style %}
+
+    .sidebar {
+    width: 80px;
+    background-color: #000000;
+    color: white;
+    position: fixed;
+    height: 100vh;
+    padding-top: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    }
+    .sidebar .nav-link {
+    color: white;
+    }
+    .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    }
+    .box {
+    background-color: #D9D9D9;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    }
+    .row .top-row-box .box {
+    height: 100%;
+    }
+
+    .background-container {
+    height: 100vh;
+    background-image: url('{{ MEDIA_URL }}custom_bkg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    }
+    .icon-row {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: 'column'
+    }
+
+    .top-row-box {
+    padding: 0;
+    margin-right: 10px;
+    }
+
+    .first-row {
+    flex: 0 0 240px; /* First row fixed height */
+    display: flex;
+    flex-direction: row;
+    }
+
+    .second-row {
+    flex: 1;
+    display: flex;
+    margin-top: 10px;
+    }
+
+    .second-row .column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .second-row .column .box {
+    flex: 1;
+    }
+
+    .claude-graph-image
+    .gpt-graph-image {
+    flex: 1;
+    <!-- height: 100%; -->
+    display: flex;
+    overflow: hidden;
+    <!-- align-items: center;
+    justify-content: center; -->
+    background-color: red;
+    }
+
+    claude-graph-image img
+    .gpt-graph-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    <!-- height: 180px;
+    object-fit: cover; -->
+    }
+    .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    }
+    .footer p {
+    flex: 1;
+    font-size: 8px;
+    color: #000000;
+    margin-bottom: 0;
+    margin-left: 8px;
+    margin-right: 8px;
+    }
+    .btn-upload {
+    width: 100px;
+    height: 20px;
+    font-weight: bold;
+    background-color: #f7e300;
+    color: #000000;
+    font-size: 8px;
+    padding: 0;
+    margin-right: 5px;
+    }
+
+    .btn-upload:hover {
+    background-color: #f7e300;
+    color: #000000;
+    }
+
+    .chat-widget {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+    }
+
+    .message-container {
+    flex: 1; /* Takes the remaining available space */
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding is included in the height */
+    }
+
+    .message {
+    display: flex;
+    margin-bottom: 10px;
+    }
+
+    .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .avatar-img {
+    width: 27px;
+    height: 24px;
+    }
+
+    .message-content {
+    flex: 1;
+    margin-left: 10px;
+    }
+
+    .message-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+
+    .message-text {
+    white-space: pre-wrap;
+    }
+
+    .message-input {
+    display: flex;
+    padding: 10px;
+    background: #f9f9f9;
+    align-items: center;
+    }
+
+    .message-input input {
+    flex: 1;
+    margin-right: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    }
+
+    .message-input button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .message-input i.material-icons {
+    font-size: 30px;
+    color: #007bff;
+    transition: color 0.3s ease;
+    }
+
+    .message-input button:hover i.material-icons {
+    color: #0056b3;
+    }
+
+    #file-input {
+    display: none;
+    }
+
+    #image-input {
+        display: none;
+    }
+
+    .issue-label {
+    position: absolute;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: black;
+    display: none; /* Hidden by default */
+    }
+
+    .sidebar img {
+    border: 2px solid transparent; /* Default border */
+    transition: border-color 0.3s ease;
+    border-radius: 15px;
+    }
+
+    .sidebar img.selected {
+    border-color: green; /* Highlight selected icon with green border */
+    }
+
+    .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -60px; /* Position loader in the center */
+    z-index: 999;
+    }
+
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+
+    .hidden {
+    display: none;
+    }
+
+    .swiper-slide {
+    width: 100%; /* Occupies the full width within Swiper */
+    height: 100%; /* Occupies the full height within Swiper */
+    }
+
+    .claude-graph-image .swiper-button-next::after,
+    .claude-graph-image .swiper-button-prev::after,
+    .gpt-graph-image .swiper-button-next::after,
+    .gpt-graph-image .swiper-button-prev::after {
+    font-size: 20px !important; /* Set desired icon size */
+    width: 40px !important; /* Adjust icon container width */
+    height: 40px !important; /* Adjust icon container height */
+    }
+
+    .typing-indicator {
+    display: flex;
+    align-items: center;
+    }
+
+    .typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    background-color: #999;
+    border-radius: 50%;
+    opacity: 0;
+    animation: typing 1.5s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+    }
+
+    .typing-indicator span:nth-child(2) {
+    animation-delay: 0.3s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+    animation-delay: 0.6s;
+    }
+
+    @keyframes typing {
+    0%, 60%, 100% {
+    opacity: 0;
+    }
+    30% {
+    opacity: 1;
+    }
+    }
+
+    .claude-loading-spinner,
+    .gpt-loading-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    }
+
+    /* Spinner Animation */
+    .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+
+{% endblock %}
+
+{% block content %}
+    <div class="background-container">
+        <div id="loader" class="loader hidden"></div>
+
+        <div class="content">
+
+                <div style="height: 50px; background: #000000; display: flex; align-items: center; justify-content: space-between;">
+                    <!-- Left: Dropdown -->
+                    <div class="dropdown-container">
+                        
+                    </div>
+
+
+                    <div style="color: white; font-size: 18px; font-weight: bold;">
+                        MisVisFix
+                    </div>
+
+                    <div class="dropdown-container">
+                        
+                    </div>
+                </div>
+
+
+            <input type="file" id="file-input" accept=".xlsx">
+            <input type="file" id="image-input" accept="image/*">
+
+            <div class="row"
+                 style="display: flex; flex-direction: row; width: 100%; padding: 0; margin: 0; height: 50%; flex: 1; overflow: hidden;">
+                {% include 'includes/view_original_image_widget.html' with firebase_image_url=original_image show_upload_icon=False %}
+                {% include 'includes/claude_widget.html' %}
+                {% include 'includes/gpt_widget.html' %}
+            </div>
+            <div class="second-row" style="min-height: 0">
+                {% include 'includes/issue_details_widget.html' %}
+                {% include 'includes/chat_widget.html' with show_send_box=False show_learn_all_box=False %}
+            </div>
+        </div>
+
+        <div id="image-modal" class="modal hidden" style="
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;">
+            <img id="expanded-image" src="" alt="Expanded View" style="max-width: 90%; max-height: 90%;">
+            <button onclick="closeModal()" style="
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #fff;
+                border: none;
+                padding: 10px;
+                cursor: pointer;">
+                Close
+            </button>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+
+        var solvedIssues = { gpt: [], claude: [] };
+        const insightAi = "MisVisFix"
+        const firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        
+
+        firebase.initializeApp(firebaseConfig)
+
+        const chartImage = document.getElementById('chartImage');
+        const chartContainer = document.querySelector('.chart-container');
+        const chartContainerLabels = document.querySelector('.chart-labels');
+
+        const gptSwiper = new Swiper('.gpt-swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            allowTouchMove: false,
+            autoplay: false,
+            navigation: {
+                nextEl: '#gpt-graph-image .swiper-button-next',
+                prevEl: '#gpt-graph-image .swiper-button-prev',
+            },
+            on: {
+                slideChange: function () {
+                    updateGptPageIndicator();
+                }
+            }
+        });
+
+        const claudeSwiper = new Swiper('.claude-swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            allowTouchMove: false,
+            autoplay: false,
+            navigation: {
+                nextEl: '#claude-graph-image .swiper-button-next',
+                prevEl: '#claude-graph-image .swiper-button-prev',
+            },
+            on: {
+                slideChange: function () {
+                    updateClaudePageIndicator();
+                }
+            }
+        });
+
+
+        const typingMessage = {
+            user: insightAi,
+            content: '<div class="typing-indicator"><span></span><span></span><span></span></div>',
+            id: 'typing-indicator'
+        };
+
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.style.display = 'none'; // Hide the modal
+        }
+
+        function expandClaudeImage() {
+            const swiper = document.querySelector('.claude-swiper-container .swiper-slide-active img'); // Get current Swiper image
+            const modal = document.getElementById('image-modal');
+            const expandedImage = document.getElementById('expanded-image');
+
+            if (swiper) {
+                expandedImage.src = swiper.src; // Set the image source in the modal
+                modal.style.display = 'flex';  // Show modal
+            }
+        }
+
+        function expandGptImage() {
+            const swiper = document.querySelector('.gpt-swiper-container .swiper-slide-active img'); // Get current Swiper image
+            const modal = document.getElementById('image-modal');
+            const expandedImage = document.getElementById('expanded-image');
+
+            if (swiper) {
+                expandedImage.src = swiper.src; // Set the image source in the modal
+                modal.style.display = 'flex';  // Show modal
+            }
+        }
+
+        function updateGptPageIndicator() {
+            const currentSlide = gptSwiper.realIndex + 1; // Swiper uses zero-based index
+            const totalSlides = gptSwiper.slides.length;
+            document.getElementById('gpt-page-indicator').textContent = `GPT (${currentSlide}/${totalSlides})`;
+        }
+
+        function updateClaudePageIndicator() {
+            const currentSlide = claudeSwiper.realIndex + 1; // Swiper uses zero-based index
+            const totalSlides = claudeSwiper.slides.length;
+            document.getElementById('claude-page-indicator').textContent = `Claude (${currentSlide}/${totalSlides})`;
+        }
+
+
+        function generateKeyIssues(container, issues, title, iconColor, type) {
+            if (issues && issues.length > 0) {
+                const titleTag = document.createElement('h5');
+                titleTag.style.fontSize = '16px';
+                titleTag.style.marginLeft = '4px';
+                titleTag.style.marginBottom = '10px';
+                titleTag.style.marginTop = '10px';
+                titleTag.style.color = 'black';
+                titleTag.style.fontWeight = 'bold';
+                titleTag.innerText = title;
+
+                container.appendChild(titleTag)
+
+                // State for expanded issues
+                const expandedIssues = {};
+
+                // Toggle issue visibility
+                function toggleIssue(issueId) {
+                    const issueDetails = document.getElementById(`issue-${type}-${issueId}-details`);
+                    const chevron = document.getElementById(`chevron-${type}-${issueId}`);
+
+                    if (expandedIssues[issueId]) {
+                        // Collapse the issue
+                        issueDetails.classList.add('hidden');
+                        chevron.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        `; // Right arrow SVG
+                        expandedIssues[issueId] = false;
+                    } else {
+                        // Expand the issue
+                        issueDetails.classList.remove('hidden');
+                        chevron.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        `; // Down arrow SVG
+                        expandedIssues[issueId] = true;
+                    }
+                }
+
+                // Render issues
+                issues.forEach((issue) => {
+                    // Create the main issue container
+                    const issueElement = document.createElement('div');
+                    issueElement.className = 'border rounded-lg';
+                    issueElement.style.marginTop = '10px';
+
+                    // Create the toggle button
+                    const button = document.createElement('button');
+                    button.className = 'w-full p-2 flex items-center justify-between hover:bg-gray-50 issue-button';
+                    button.dataset.issueId = type + '-' + issue.id;
+
+
+                    const buttonContent = `
+                        <div class="flex items-center gap-2">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" x2="12" y1="8" y2="12"/>
+                                    <line x1="12" x2="12.01" y1="16" y2="16"/>
+                                </svg>
+                            </span>
+                            <span class="font-medium p-2">${issue.title}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="solved-${type}-indicators" id="solved-${type}-${issue.id}" style="display: flex; gap: 5px;"></span>
+
+                            <span class="chevron-icon" id="chevron-${type}-${issue.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6"/>
+                                </svg>
+                            </span>
+                        </div>
+                        
+                    `;
+                    button.innerHTML = buttonContent;
+
+                    // Create the details section
+                    const details = document.createElement('div');
+                    details.id = `issue-${type}-${issue.id}-details`;
+                    details.className = 'border-t hidden';
+                    details.innerHTML = `
+                        <hr class="border-gray-300 m-0 p-0" />
+                        <div class="space-y-4 pt-2 pl-2 pr-2">
+                            <div>
+                                <h4 class="font-medium text-sm mb-1" style="color:black">Details</h4>
+                                <p class="text-sm" style="color:black; text-align: justify;">${issue.details}</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm mb-1" style="color:black">How to Improve</h4>
+                                <p class="text-sm" style="color:black; text-align: justify;">${issue.improvement}</p>
+                            </div>
+                        </div>
+                    `;
+
+                    // Create the label for mouse events
+                    const label = document.createElement('div');
+                    label.className = `issue-label-${type}-${issue.id}`;
+                    label.style.position = 'absolute';
+                    label.style.display = 'none';
+                    label.style.fontSize = '14px';
+                    label.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    label.style.color = 'red';
+                    label.style.padding = '2px 4px';
+                    label.style.borderRadius = '4px';
+                    label.innerText = issue.title;
+
+                    // Add Event Listeners
+                    button.addEventListener('click', () => toggleIssue(issue.id));
+                    button.addEventListener('mouseenter', () => {
+                        label.style.display = 'block';
+                        updateLabelPositions(issues, type)
+                    });
+                    button.addEventListener('mouseleave', () => {
+                        label.style.display = 'none';
+                    });
+
+                    // Append elements to the containers
+                    issueElement.appendChild(button);
+                    issueElement.appendChild(details);
+                    container.appendChild(issueElement);
+                    document.body.appendChild(label);
+                });
+            }
+        }
+
+        function setKeyIssues() {
+            solvedIssues = { gpt: [], claude: [] };
+
+            data = {{ key_issues|safe }};
+            
+            while (chartContainerLabels.firstChild) {
+                chartContainerLabels.removeChild(chartContainerLabels.firstChild);
+            }
+            
+            const claudeContainer = document.getElementById('claude-container');
+            const gptContainer = document.getElementById('gpt-container');
+            const detailsContainer = document.getElementById('details-container');
+            const noIssueContainer = document.getElementById('no-issue-message');
+
+            claudeContainer.innerHTML = '';
+            gptContainer.innerHTML = '';
+
+            if (data.key_issues && data.key_issues.length > 0) {
+                noIssueContainer.style.display = "none";
+                detailsContainer.style.display = "flex";
+
+                if (data.major_claude && data.major_claude.length > 0) {
+                    generateKeyIssues(claudeContainer, data.major_claude, "Major Issues", '#ED0F0F', 'claude');
+                }
+                if (data.minor_claude && data.minor_claude.length > 0) {
+                    generateKeyIssues(claudeContainer, data.minor_claude, "Minor Issues", "#FF00F7", 'claude');
+                }
+                if (data.potentials_claude && data.potentials_claude.length > 0) {
+                    generateKeyIssues(claudeContainer, data.potentials_claude, "Potential Issues", "#FFA500", 'claude');
+                }
+
+                if (data.major_gpt && data.major_gpt.length > 0) {
+                    generateKeyIssues(gptContainer, data.major_gpt, "Major Issues", '#ED0F0F', 'gpt');
+                }
+                if (data.minor_gpt && data.minor_gpt.length > 0) {
+                    generateKeyIssues(gptContainer, data.minor_gpt, "Minor Issues", "#FF00F7", 'gpt');
+                }
+                if (data.potentials_gpt && data.potentials_gpt.length > 0) {
+                    generateKeyIssues(gptContainer, data.potentials_gpt, "Potential Issues", "#FFA500", 'gpt');
+                }
+            } else {
+                noIssueContainer.style.display = "block";
+                detailsContainer.style.display = "none"; 
+            }
+        }
+
+
+        function updateLabelPositions(data_key_issues, type) {
+            data_key_issues.forEach(issue => {
+                const label = document.querySelector(`.issue-label-${type}-${issue.id}`);
+
+                if (label) {
+
+                    let topGap = parseFloat(issue.top_gap);
+                    let leftGap = parseFloat(issue.left_gap);
+
+                    const actual_box_width = parseInt(((window.screen.width - 20) / 3))
+                    const actual_box_height = parseInt(((window.screen.height - 50) * .5) - 40)
+
+                    // 90 for top item 20 for spacing
+                    // 50 minus because of top toolbar
+                    if (topGap + (90 + 20) >= actual_box_height) {
+                        topGap = actual_box_height - 50
+                    } else {
+                        topGap += 90
+                    }
+
+                    if (leftGap > actual_box_width) {
+                        leftGap = actual_box_width
+                    }
+
+                    label.style.top = `${topGap}px`;
+                    label.style.left = `${leftGap}px`;
+                }
+            });
+        }
+
+        function updateSolvedIndicators() {
+            document.querySelectorAll(".issue-button").forEach((button) => {
+                const issueTitle = button.querySelector(".font-medium").innerText;
+                const solvedGptContainer = button.querySelector(".solved-gpt-indicators");
+                const solvedClaudeContainer = button.querySelector(".solved-claude-indicators");
+                
+                let indicatorsHTML = "";
+                const gptSolved = solvedIssues.gpt.includes(issueTitle);
+                const claudeSolved = solvedIssues.claude.includes(issueTitle);
+
+                if (gptSolved && solvedGptContainer) {
+                    indicatorsHTML = `
+                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid gray; background: white; border-radius: 50%;">
+                            <i class="fa fa-check" aria-hidden="true" style="color: #4CAF50; font-size: 14px;"></i>
+                        </span>
+                    `;
+
+                    solvedGptContainer.innerHTML = indicatorsHTML;
+                }
+
+                if (claudeSolved && solvedClaudeContainer) {
+                    indicatorsHTML = `
+                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid gray; background: white; border-radius: 50%;">
+                            <i class="fa fa-check" aria-hidden="true" style="color: #4CAF50; font-size: 14px;"></i>
+                        </span>
+                    `;
+
+                    solvedClaudeContainer.innerHTML = indicatorsHTML;
+                }
+            });
+        }
+
+        function appendMessage(message, isShowLearn = true, newIssues = []) {
+            const $messageContainer = $('#message-container');
+            const avatarImage = message.user === 'You' ? '{{ MEDIA_URL }}new_user.png' : '{{ MEDIA_URL }}ai_image.png';
+
+
+            let newIssuesHtml = '';
+            if (newIssues.length > 0) {
+                newIssuesHtml = `
+                    <h5 style="font-weight: bold; color: black; margin-top: 10px;">
+                        Do you want to add this issues?
+                    </h3>
+                    <div class="new-issues-container">
+                `;
+                newIssues.forEach((issue, index) => {
+                    const key = Object.keys(issue)[0]; // Extract issue type key
+                    const issueData = issue[key]; // Get issue details (label + description)
+
+                    newIssuesHtml += `
+                        <div class="new-issue-box" data-index="${index}" data-issue='${JSON.stringify(issue).replace(/'/g, "&#39;").replace(/"/g, "&quot;")}'>
+                            <div class="new-issue-header">
+                                <span class="issue-title" style="font-weight: bold">${issueData.label}</span>
+                                <div class="icon-group">
+                                    <span class="circle-icon expand-icon">+</span>
+                                </div>
+                            </div>
+                            <div class="issue-description" style="text-align: justify;">${issueData.description}</div>
+                        </div>
+                    `;
+                });
+                newIssuesHtml += `</div>`;
+            }
+
+
+            const messageHtml = `
+            <div class="message" id="${message.id || ''}">
+                <div class="avatar">
+                    <img src="${avatarImage}" alt="avatar" class="avatar-img">
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        ${message.user}
+                    </div>
+                    <div class="message-text" style="text-align: justify;">${message.content}</div>
+                    ${newIssuesHtml}
+                </div>
+            </div>
+        `;
+            $messageContainer.append(messageHtml);
+            $messageContainer.scrollTop($messageContainer[0].scrollHeight); // Scroll to the bottom
+
+            $('.issue-description').hide(); // Hide descriptions initially
+
+            $('.expand-icon').off('click').on('click', function () {
+                const $parent = $(this).closest('.new-issue-box');
+                const $description = $parent.find('.issue-description');
+                const $icon = $(this);
+
+                if ($description.is(':visible')) {
+                    $description.slideUp();
+                    $icon.text('+'); // Collapse state
+                } else {
+                    $description.slideDown();
+                    $icon.text('-'); // Expand state
+                }
+            });
+        }
+
+        const messages = [];
+
+        function setGptImages() {
+            const gptSwiperWrapper = document.getElementById('gpt-swiper-wrapper');
+            gptSwiperWrapper.innerHTML = ''; // Clear existing slides
+            const gpt_data = {{ gpt | safe }};
+            const gptImages = gpt_data.images || [];
+            solvedIssues.gpt = gpt_data.solved_list || [];
+            if (gptImages && gptImages.length > 0) {
+                gptImages.forEach(image => {
+                    const newSlide = document.createElement('div');
+                    newSlide.classList.add('swiper-slide');
+                    newSlide.innerHTML = `
+                        <img style="width: 100%; height: 100%; object-fit: contain;" src="${image}" alt="GPT Image">
+                    `;
+                    gptSwiperWrapper.appendChild(newSlide);
+                });
+                gptSwiper.update();
+                gptSwiper.slideTo(0);
+                updateGptPageIndicator()
+            }
+        }
+
+        function setClaudeImages() {
+            const claudeSwiperWrapper = document.getElementById('claude-swiper-wrapper');
+            claudeSwiperWrapper.innerHTML = ''; // Clear existing slides
+            const claude_data = {{ claude | safe }};
+            const claudeImages = claude_data.images || [];
+            solvedIssues.claude = claude_data.solved_list || [];
+            if (claudeImages && claudeImages.length > 0) {
+                claudeImages.forEach(image => {
+                    const newSlide = document.createElement('div');
+                    newSlide.classList.add('swiper-slide');
+                    newSlide.innerHTML = `
+                        <img style="width: 100%; height: 100%; object-fit: contain;" src="${image}" alt="Claude Image">
+                    `;
+                    claudeSwiperWrapper.appendChild(newSlide);
+                });
+                claudeSwiper.update();
+                claudeSwiper.slideTo(0);
+                updateClaudePageIndicator()
+            }
+        }
+
+        function setChatMessgaes() {
+            const messageContainer = document.getElementById('message-container');
+            messageContainer.innerHTML = ''; // Clear existing messages
+
+            const chatMessages = {{ chats | safe }};
+            if (chatMessages && chatMessages.length > 0) {
+                chatMessages.forEach(message => {
+                    const newIssues = message.new_issues || [];
+                    appendMessage(message, false, newIssues);
+                });
+            } else {
+                appendMessage({
+                    user: insightAi,
+                    content: "No messages found."
+                });
+            }
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            setKeyIssues();
+            setGptImages();
+            setClaudeImages();
+            updateSolvedIndicators();
+            setChatMessgaes();
+
+
+            const img = document.getElementById('chartImage');
+            const src = img.getAttribute('data-src');
+            console.log("Image to be loaded from:", src);
+
+            if (!src) {
+                console.error("No src found in data-src.");
+            return;
+            }
+
+            setTimeout(() => {
+                const loader = new Image();
+                loader.src = src;
+
+                loader.onload = () => {
+                    img.src = src;
+                    img.style.display = 'block';
+                };
+
+                loader.onerror = () => {
+                    console.error("Failed to load image:", src);
+                };
+            }, 500);
+
+            const expandClaudeImageButton = document.getElementById('claude_expand');
+
+             expandClaudeImageButton.addEventListener('click', function () {
+                expandClaudeImage()
+            });
+
+            const expandGptImageButton = document.getElementById('gpt_expand');
+
+             expandGptImageButton.addEventListener('click', function () {
+                expandGptImage()
+            });
+
+        });
+
+
+        function setEmptyContainer() {
+            document.getElementById('details-container').innerHTML = '';
+            gptSwiper.removeAllSlides(); // Clears all slides from the Swiper
+            gptSwiper.update();          // Updates Swiper to reflect changes
+            document.getElementById('gpt-page-indicator').textContent = `GPT (0/0)`;
+
+            claudeSwiper.removeAllSlides(); // Clears all slides from the Swiper
+            claudeSwiper.update();          // Updates Swiper to reflect changes
+            document.getElementById('claude-page-indicator').textContent = `Claude (0/0)`;
+        }
+
+
+    </script>
+<script src="{% static 'js/image_helper.js' %}"></script>
+{% endblock %}

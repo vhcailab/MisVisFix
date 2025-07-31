@@ -1,0 +1,87 @@
+<div id="misleadPopup" style="
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    padding: 30px 30px 20px 30px;
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+">
+    <!-- Close Icon (Top Right) -->
+    <button onclick="closePopup()" style="
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        transition: background-color 0.2s ease, color 0.2s ease;
+    " aria-label="Close" title="Close"
+    onmouseover="this.style.backgroundColor='#e0e0e0'; this.style.color='#000';"
+    onmouseout="this.style.backgroundColor='#f0f0f0'; this.style.color='#333';">
+        &times;
+    </button>
+
+    <!-- Heading -->
+    <h2 style="
+        margin-top: 0;
+        margin-right: 50px;
+        font-size: 18px;
+        color: #333;
+    ">
+        Applying your requested change may result in a misleading chart for the following reason(s):
+    </h2>
+
+    <!-- Reason Text -->
+    <p id="popupReasonText" style="
+        font-size: 15px;
+        line-height: 1.5;
+        color: #444;
+        margin-bottom: 30px;
+        white-space: pre-wrap;
+    ">
+        Loading...
+    </p>
+
+    <!-- Action Button -->
+    <div style="display: flex; justify-content: flex-end;">
+         <button onclick="closePopup()" style="
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        ">
+            Don't continue
+        </button>
+        
+        <button onclick="onYesClicked()" style="
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        ">
+            Continue Anyways
+        </button>
+    </div>
+</div>

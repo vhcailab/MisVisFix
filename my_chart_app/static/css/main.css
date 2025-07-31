@@ -1,0 +1,243 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.showPasswordToggle {
+    cursor: pointer;
+    transition: all;
+}
+
+.showPasswordToggle:hover {
+    transform: scale(1.2);
+}
+
+
+.addButtonNegativeMargin {
+    margin-top: 30px;
+}
+
+
+/* Dropdown container styles */
+.dropdown-container {
+    position: relative;
+    width: 120px;
+    height: 50px;
+    /* background-color: rgba(235, 235, 235, 0.41); */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-radius: 0px;
+    box-sizing: border-box;
+}
+
+.custom-dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.dropdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    pointer-events: none; /* Allow interactions with the hidden dropdown */
+}
+
+.dropdown-text {
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.dropdown-arrow {
+    width: 16px;
+    height: 16px;
+}
+
+.upload-dataset-container {
+    position: relative;
+    width: 180px;
+    height: 50px;
+    background-color: rgba(235, 235, 235, 0.41);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-radius: 0px;
+    box-sizing: border-box;
+}
+
+.upload-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.upload-text {
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.hidden { display: none; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.hover\:bg-gray-50:hover { background-color: #f9fafb; }
+.rounded-lg { border-radius: 8px; }
+.border { border: 1px solid #D9D9D9; }
+.p-4 { padding: 16px; }
+.bg-gray-50 { background-color: #f9fafb; }
+.text-sm { font-size: 14px; }
+.text-gray-600 { color: #6b7280; }
+.text-gray-700 { color: #374151; }
+.font-medium { font-weight: 500; }
+.space-y-4 > * + * { margin-top: 16px; }
+.space-y-2 > * + * { margin-top: 8px; }
+.icon {
+    flex-shrink: 0; /* Prevents the icon from shrinking */
+}
+
+.font-medium {
+    flex: 1; /* Occupies available space */
+    text-align: left; /* Aligns text to the left */
+}
+
+.chevron-icon {
+    flex-shrink: 0; /* Keeps the arrow icon at its natural size */
+    margin-left: 8px; /* Adds spacing between text and arrow */
+}
+
+.issue-button {
+    width: 100%;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.issue-button:hover {
+    background-color: #f9fafb; /* Add hover effect */
+}
+
+/* .learn-btn {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+}
+.learn-btn:hover {
+    color: darkblue;
+} */
+
+/* Container for new issues */
+.new-issues-container {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+/* Each issue box */
+.new-issue-box {
+    background: white;
+    border: 1px solid #D3D3D3    ;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+}
+
+/* Hover effect for clarity */
+.new-issue-box:hover {
+    background: #f9f9f9;
+}
+
+/* New Issue Header (Title + Icons) */
+.new-issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Issue Title */
+.issue-title {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #000;
+}
+
+/* Icons Group (Expand/Collapse + Tick) */
+.icon-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* Circle Icons (Expand/Collapse + Tick) */
+.circle-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+/* Expand/Collapse Icon */
+.expand-icon {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.expand-icon:hover {
+    background-color: #0056b3;
+}
+
+/* Tick Icon */
+.tick-icon {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #28a745;
+}
+
+.tick-icon:hover {
+    background-color: #218838;
+}
+
+/* Issue Description (Initially Hidden) */
+.issue-description {
+    font-size: 14px;
+    display: none;
+    padding: 5px;
+    color: #333;
+}

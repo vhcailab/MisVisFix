@@ -1,0 +1,298 @@
+{
+    "not_data": {
+        "label": "Not Data",
+        "description": "A visualization should illustrate actual data, not just concepts."
+    },
+    "selective_data": {
+        "label": "Selective Data",
+        "description": "A visualization should not cherry-pick data to support a predetermined conclusion."
+    },
+    "dubious_data": {
+        "label": "Dubious Data",
+        "description": "A visualization should be based on reliable and valid sources."
+    },
+    "non_sequitur": {
+        "label": "Non-Sequitur",
+        "description": "A visualization should reveal meaningful information from the data."
+    },
+    "too_few_data_points": {
+        "label": "Too Few Data Points",
+        "description": "A visualization should not connect just two data points with a line to imply a trend."
+    },
+    "discretized_continuous_variable": {
+        "label": "Discretized Continuous Variable",
+        "description": "Visualizations should not unnecessarily turn continuous variables into categories."
+    },
+    "missing_normalization": {
+        "label": "Missing Normalization",
+        "description": "A visualization should compare per capita values when appropriate, not just absolute values."
+    },
+    "inappropriate_item_order": {
+        "label": "Inappropriate Item Order",
+        "description": "A visualization should order items logically, not arbitrarily."
+    },
+    "inappropriate_metric": {
+        "label": "Inappropriate Metric",
+        "description": "A visualization should use appropriate metrics, thresholds, or definitions for grouping data."
+    },
+    "questionable_prediction": {
+        "label": "Questionable Prediction",
+        "description": "A visualization should not extrapolate current trends without explaining the projection method."
+    },
+    "trend_line_on_random_data": {
+        "label": "Trend Line on Random Data",
+        "description": "A visualization should not apply regression lines to data with weak correlation."
+    },
+    "inappropriate_use_of_accumulation": {
+        "label": "Inappropriate Use of Accumulation",
+        "description": "A visualization should not accumulate historical values to hide recent declining values."
+    },
+    "inappropriate_aggregation_granularity": {
+        "label": "Inappropriate Aggregation Granularity",
+        "description": "A visualization should use an appropriate level of data aggregation."
+    },
+    "two_way_normalization": {
+        "label": "Two-Way Normalization",
+        "description": "Visualizations should not arbitrarily divide values by column or row totals."
+    },
+    "data_of_different_magnitudes": {
+        "label": "Data of Different Magnitudes",
+        "description": "A visualization should not plot two series with vastly different magnitudes on the same scale."
+    },
+    "dual_axis": {
+        "label": "Dual Axis",
+        "description": "A visualization should use dual axes carefully, ensuring clear labeling and explanation to prevent misinterpretation."
+    },
+    "extended_axis": {
+        "label": "Extended Axis",
+        "description": "A visualization should not extend axes beyond what's appropriate for the data."
+    },
+    "inappropriate_axis_range": {
+        "label": "Inappropriate Axis Range",
+        "description": "A visualization should use appropriate axis ranges that fit the data."
+    },
+    "inverted_axis": {
+        "label": "Inverted Axis",
+        "description": "A visualization should not flip axes from convention without good reason."
+    },
+    "linear_scale_on_exponential_data": {
+        "label": "Linear Scale on Exponential Data",
+        "description": "A visualization should use appropriate scales for the data type."
+    },
+    "log_scale": {
+        "label": "Log Scale",
+        "description": "A visualization should indicate when a logarithmic scale is used."
+    },
+    "truncated_axis": {
+        "label": "Truncated Axis",
+        "description": "A visualization should show the full range of values on its axes."
+    },
+    "confusing_chart_type": {
+        "label": "Confusing Chart Type",
+        "description": "A visualization should not use chart types that deviate slightly from standard conventions."
+    },
+    "inappropriate_use_of_bar_chart": {
+        "label": "Inappropriate Use of Bar Chart",
+        "description": "A visualization should use bar charts only when appropriate for the data type."
+    },
+    "inappropriate_use_of_line_chart": {
+        "label": "Inappropriate Use of Line Chart",
+        "description": "A visualization should use line charts only for continuous data and with correct axis orientation."
+    },
+    "inappropriate_use_of_pie_chart": {
+        "label": "Inappropriate Use of Pie Chart",
+        "description": "A visualization should use pie charts only for part-to-whole relationships with a small number of categories, typically no more than 5-7 slices."
+    },
+    "inappropriate_use_of_scatterplot": {
+        "label": "Inappropriate Use of Scatterplot",
+        "description": "A visualization should use scatterplots only when showing relationships between two variables."
+    },
+    "inappropriate_use_of_stacked_charts": {
+        "label": "Inappropriate Use of Stacked Charts",
+        "description": "A visualization should not stack too many layers in a chart."
+    },
+    "misusing_circular_layout": {
+        "label": "Misusing Circular Layout",
+        "description": "A visualization should not use circular layouts that make accurate comparisons difficult."
+    },
+    "color_blind_unfriendly": {
+        "label": "Color Blind Unfriendly",
+        "description": "A visualization should use color schemes that are distinguishable by color-blind individuals."
+    },
+    "indistinguishable_colors": {
+        "label": "Indistinguishable Colors",
+        "description": "A visualization should use distinct colors for different categories."
+    },
+    "overusing_colors": {
+        "label": "Overusing Colors",
+        "description": "A visualization should use colors judiciously and meaningfully."
+    },
+    "cluttering": {
+        "label": "Cluttering",
+        "description": "A visualization should not include too many data points or series."
+    },
+    "confusing_legend": {
+        "label": "Confusing Legend",
+        "description": "A visualization should have a clear, well-organized legend."
+    },
+    "illegible_text": {
+        "label": "Illegible Text",
+        "description": "Visualizations should not have overlapping or unreadable text."
+    },
+    "misalignment": {
+        "label": "Misalignment",
+        "description": "A visualization should have appropriately aligned items and labels."
+    },
+    "missing_abbreviation": {
+        "label": "Missing Abbreviation",
+        "description": "A visualization should use appropriate abbreviations for long text."
+    },
+    "plotting_error": {
+        "label": "Plotting Error",
+        "description": "A visualization should be free of numerical or software errors."
+    },
+    "plotting_out_of_chart": {
+        "label": "Plotting Out of Chart",
+        "description": "Data values that go beyond the axis range should not be included in a visualization."
+    },
+    "missing_axis": {
+        "label": "Missing Axis",
+        "description": "A visualization should include all necessary axes."
+    },
+    "missing_axis_ticks": {
+        "label": "Missing Axis Ticks",
+        "description": "A visualization should have appropriate tick marks on its axes."
+    },
+    "missing_axis_title": {
+        "label": "Missing Axis Title",
+        "description": "A visualization should have clear titles for all axes."
+    },
+    "missing_legend": {
+        "label": "Missing Legend",
+        "description": "A visualization should include a legend when multiple data series are present."
+    },
+    "missing_title": {
+        "label": "Missing Title",
+        "description": "A visualization should have a clear, descriptive title."
+    },
+    "missing_units": {
+        "label": "Missing Units",
+        "description": "A visualization should indicate the units of measurement."
+    },
+    "missing_value_labels": {
+        "label": "Missing Value Labels",
+        "description": "A visualization should include value labels where appropriate."
+    },
+    "changing_scale": {
+        "label": "Changing Scale",
+        "description": "A visualization should maintain consistent scales within the same chart and between related charts."
+    },
+    "inconsistent_binning_size": {
+        "label": "Inconsistent Binning Size",
+        "description": "A visualization should use consistently defined boundaries for binning groups."
+    },
+    "inconsistent_grouping": {
+        "label": "Inconsistent Grouping",
+        "description": "A visualization should apply consistent grouping methods across all data."
+    },
+    "inconsistent_tick_intervals": {
+        "label": "Inconsistent Tick Intervals",
+        "description": "A visualization should use regular, logical intervals for tick marks."
+    },
+    "inconsistent_tick_labels": {
+        "label": "Inconsistent Tick Labels",
+        "description": "A visualization should use consistently formatted tick labels."
+    },
+    "inconsistent_value_labels": {
+        "label": "Inconsistent Value Labels",
+        "description": "A visualization should use consistently formatted value labels."
+    },
+    "misrepresentation": {
+        "label": "Misrepresentation",
+        "description": "A visualization should draw data proportionally and to scale."
+    },
+    "violating_color_convention": {
+        "label": "Violating Color Convention",
+        "description": "A visualization should use colors that match conventional meanings unless clearly explained otherwise."
+    },
+    "three_d": {
+        "label": "3d",
+        "description": "A visualization should avoid unnecessary 3D for 2D data, reserving 3D for inherently three-dimensional data or complex spatial relationships."
+    },
+    "area_encoding": {
+        "label": "Area Encoding",
+        "description": "A visualization should use area encoding judiciously, ensuring it's appropriate for the data type and clearly explained."
+    },
+    "distractive_value_labels": {
+        "label": "Distractive Value Labels",
+        "description": "A visualization should position value labels to avoid affecting perceived data size."
+    },
+    "inappropriate_aspect_ratio": {
+        "label": "Inappropriate Aspect Ratio",
+        "description": "A visualization should use an aspect ratio that accurately represents data relationships."
+    },
+    "inappropriate_use_of_smoothing": {
+        "label": "Inappropriate Use of Smoothing",
+        "description": "A visualization should use data smoothing judiciously and explain transformations."
+    },
+    "ineffective_color_scheme": {
+        "label": "Ineffective Color Scheme",
+        "description": "A visualization should use color schemes that enhance data understanding."
+    },
+    "map_projection_distortion": {
+        "label": "Map Projection Distortion",
+        "description": "A map visualization should select appropriate projections for the specific geographic area and data type."
+    },
+    "pictorial_area_encoding": {
+        "label": "Pictorial Area Encoding",
+        "description": "Visualizations should use pictograms or icon-based encoding thoughtfully, ensuring accurate data representation without introducing bias."
+    },
+    "sine_illusion": {
+        "label": "Sine Illusion",
+        "description": "A visualization should be aware of perceptual effects on curve steepness in line charts."
+    },
+    "correlation_not_causation": {
+        "label": "Correlation, Not Causation",
+        "description": "A visualization should not imply causation from correlation."
+    },
+    "invalid_comparison": {
+        "label": "Invalid Comparison",
+        "description": "A visualization should only compare related and comparable data points."
+    },
+    "pattern_seeking": {
+        "label": "Pattern Seeking",
+        "description": "A visualization should not use historical correlation to predict future trends without justification."
+    },
+    "hidden_distribution": {
+        "label": "Hidden Distribution",
+        "description": "A visualization should show underlying data distribution when relevant."
+    },
+    "hidden_population_size": {
+        "label": "Hidden Population Size",
+        "description": "A visualization should indicate the size of the population represented by the data."
+    },
+    "hidden_uncertainty": {
+        "label": "Hidden Uncertainty",
+        "description": "A visualization should include appropriate representations of data uncertainty."
+    },
+    "overplotting": {
+        "label": "Overplotting",
+        "description": "A visualization should use techniques to prevent overlapping data points from obscuring patterns."
+    },
+    "misleading_annotation": {
+        "label": "Misleading Annotation",
+        "description": "A visualization should use accurate and unbiased annotations."
+    },
+    "misleading_claim": {
+        "label": "Misleading Claim",
+        "description": "A visualization should not make claims unsupported by the data."
+    },
+    "misleading_title": {
+        "label": "Misleading Title",
+        "description": "A visualization should have an accurate title that reflects the true nature of the data."
+    },
+    "misleading_value_labels": {
+        "label": "Misleading Value Labels",
+        "description": "A visualization should have value labels that accurately reflect the underlying data."
+    }
+}

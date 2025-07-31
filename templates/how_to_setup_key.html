@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    How It Works
+{% endblock %}
+
+{% block style %}
+
+    #howItWorksTable p {
+        color: #000 !important;
+        text-align: justify !important;
+    }
+
+    .background-container {
+        height: 100vh;
+        background-image: url('{{ MEDIA_URL }}custom_bkg.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: auto;
+        padding: 40px;
+    }
+
+    #howItWorksTable th {
+        background-color: #f8f9fa !important;
+        color: #000000 !important;
+    }
+
+    #howItWorksTable thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    .table-scroll-wrapper {
+        max-height: 600px;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+{% endblock %}
+
+{% block content %}
+
+<div class="background-container">
+    <h2 class="text-center mb-5 fw-bold" style="color: white;">API Key Setup Guide</h2>
+
+    <div class="table-scroll-wrapper">
+        <table id="howItWorksTable" class="table table-bordered border-secondary table-striped mb-0 text-center">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 20%;">Step</th>
+                    <th style="width: 40%;">Instructions</th>
+                    <th style="width: 40%;">Visual Guide</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Step 1 -->
+                <tr>
+                    <td>
+                        <h5 class="fw-semibold text-primary">OpenAI Key Setup</h5>
+                    </td>
+                    <td>
+                        <ol class="mb-0 pl-3">
+                        <li class="mb-2">
+                            <strong>Go to the API Key Page:</strong>  
+                            Visit <a href="https://platform.openai.com/account/api-keys" target="_blank">https://platform.openai.com/account/api-keys</a> and click <em>“+ Create new secret key.”</em>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Fill in Key Details:</strong>  
+                            (Optional) Add a name, choose your project and permissions, then click <em>“Create secret key.”</em>
+                        </li>
+                        <li>
+                            <strong>Copy and Save the Key:</strong>  
+                            Click <em>“Copy”</em> to save your key somewhere secure. You won’t be able to view it again.
+                        </li>
+                        </ol>
+                    </td>
+                    <td class="text-center align-middle">
+                        <img src="{{ MEDIA_URL }}tutorial/openai.png" alt="Upload" class="img-fluid rounded" style="max-height: 200px;">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h5 class="fw-semibold text-primary">Claude Key Setup</h5>
+                    </td>
+                    <td>
+                        <ol class="mb-0 pl-3">
+                            <li class="mb-2">
+                                <strong>Go to the API Key Page:</strong>  
+                                Visit <a href="https://console.anthropic.com/settings/keys" target="_blank">https://console.anthropic.com/settings/keys</a> and click <em>“+ Create Key.”</em>
+                            </li>
+                            <li class="mb-2">
+                                <strong>Set Workspace and Name:</strong>  
+                                Select your workspace from the dropdown, enter a name for the key, and click <em>“Add.”</em>
+                            </li>
+                            <li>
+                                <strong>Copy and Save the Key:</strong>  
+                                Click <em>“Copy Key”</em> and store it safely. You won’t be able to view it again after closing.
+                            </li>
+                        </ol>
+                    </td>
+                    <td class="text-center align-middle">
+                        <img src="{{ MEDIA_URL }}tutorial/claude-key.png" alt="Claude Key Setup" class="img-fluid rounded" style="max-height: 200px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5 class="fw-semibold text-primary">Assistant ID Setup</h5>
+                    </td>
+                    <td>
+                        <ol class="mb-0 pl-3">
+                            <li class="mb-2">
+                                <strong>Go to the Assistants Page:</strong>  
+                                Visit <a href="https://platform.openai.com/assistants" target="_blank">https://platform.openai.com/assistants</a> and click <em>“+ Create”</em> to add a new assistant.
+                            </li>
+                            <li class="mb-2">
+                                <strong>Configure the Assistant:</strong>  
+                                Enter a name, model, and then save the assistant.
+                            </li>
+                            <li>
+                                <strong>Copy the Assistant ID:</strong>  
+                                Once created, click your assistant and copy the <em>ID</em> shown in the detail panel.
+                            </li>
+                        </ol>
+                    </td>
+                    <td class="text-center align-middle">
+                        <img src="{{ MEDIA_URL }}tutorial/assistant.png" alt="Assistant ID Setup" class="img-fluid rounded" style="max-height: 200px;">
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
