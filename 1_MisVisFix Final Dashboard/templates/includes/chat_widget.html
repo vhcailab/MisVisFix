@@ -1,0 +1,35 @@
+<div class="column" style="flex: 1;margin-left: 10px;padding: 0;">
+    <div class="box" id="box7" style="margin: 0;padding: 0; flex: 1;overflow: hidden; position: relative;">
+
+        {% if show_learn_all_box %}
+            <div id="learn-all-icon" style="position: absolute; top: 10px; right: 10px; cursor: pointer; background: #fff; border-radius: 50%; box-shadow: 0 0px 10px rgba(0,0,0,0.2); padding: 5px; z-index: 10;">
+                <i class="material-icons" style="color: #007bff;">school</i>
+            </div>
+        {% endif %}
+
+        <div id="chat-widget" class="chat-widget" style="overflow: hidden">
+            <div class="message-container" id="message-container" style="overflow-y: auto">
+                <!-- Messages will be dynamically added here -->
+            </div>
+
+            {% if show_send_box %}
+                <div style="margin: 10px; border: 1px solid #ddd; box-shadow: 0 0px 10px rgba(0,0,0,0.2)">
+                    <div class="message-input">
+                        <select id="chat-type" style="height: 100%; margin-right: 10px; padding: 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="text">Text</option>
+                            <option value="original_claude">Original Image (Claude)</option>
+                            <option value="latest_claude">Latest Image (Claude)</option>
+                            <option value="original_gpt">Original Image (GPT)</option>
+                            <option value="latest_gpt">Latest Image (GPT)</option>
+                            <option value="original_both">Original Image (BOTH)</option>
+                        </select>
+                        <input type="text" id="message-content" placeholder="Enter prompt here...">
+                        <button id="send-message">
+                            <i class="material-icons">send</i>
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
